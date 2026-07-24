@@ -1,5 +1,5 @@
 /* ==========================================================================
-   🎨 INTI AI | ESTILOS DE VANGUARDIA AUDITADOS (FONDO EXPANSIVO)
+   🎨 INTI AI | 
    ========================================================================== */
 :root {
     --color-fondo-oscuro: #0B0F19;
@@ -17,9 +17,16 @@ body {
     color: var(--color-texto-principal); 
     line-height:1.6; 
     overflow-x:hidden; 
-    background: url('../assets/hero-bg-inti.png') no-repeat center center fixed;
+    background: url('../assets/hero-bg-inti.png') no-repeat center center;
     background-size: cover;
+    background-attachment: scroll;
     background-color: var(--color-fondo-oscuro); 
+}
+
+@media (min-width: 769px) {
+    body {
+        background-attachment: fixed;
+    }
 }
 
 /* ==========================================
@@ -62,7 +69,7 @@ body {
     text-shadow: 0 2px 10px rgba(43, 8, 8, 0.164);
 }
 
-/* Clase de alta visibilidad aislada para INTI AI */
+/* Clase aislada para INTI AI */
 .marca-inti-ai {
     color: #00FFFF; 
     font-weight: 800; 
@@ -76,7 +83,7 @@ body {
 }
 
 /* ==========================================
-   💻 BLOQUE HERO SECTION (Limpio y Transparente)
+   💻 HERO SECTION (Limpio y Transparente)
    ========================================== */
 .hero-section {
     position: relative;
@@ -126,7 +133,7 @@ h1 {
 .btn-primary, .btn-submit {
     display: inline-block;
     
-    /* LÍNEA MODIFICADA: Dual-Tone Border Effect a través de capas de recortes de fondo. Transiciona suave de cian a dorado. */
+    /* Dual-Tone Border Effect a través de capas de recortes de fondo. Transiciona suave de cian a dorado. */
     background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.85)) padding-box,
                 linear-gradient(90deg, #00FFFF, var(--color-acento-dorado)) border-box;
     border: 2px solid transparent;
@@ -140,24 +147,24 @@ h1 {
     cursor: pointer;
     transition: var(--transicion-organica);
     
-    /* LÍNEA MODIFICADA: Sombra Neón Doble, Difusa y Expansiva (Cian izquierda, Dorado derecha). */
+    /* Sombra Neón Doble, Difusa y Expansiva (Cian izquierda, Dorado derecha). */
     box-shadow: -10px 0 20px rgba(0, 255, 255, 0.25), 10px 0 20px rgba(204, 184, 0, 0.25);
     will-change: transform, box-shadow;
 }
 
 .btn-primary:hover, .btn-submit:hover {
     transform: translateY(-5px) scale(1.03);
-    /* LÍNEA MODIFICADA: Incremento del resplandor en hover para efecto WhatsApp, expansivo y difuso. */
+    /*  Incremento del resplandor en hover para efecto WhatsApp, expansivo y difuso. */
     box-shadow: -15px 0 35px rgba(0, 255, 255, 0.6), 15px 0 35px rgba(204, 184, 0, 0.6);
 }
 
-/* LÍNEA AGREGADA: Efecto Neón Cian Difuso en texto de botón */
+/*  Efecto Neón Cian Difuso en texto de botón */
 .text-cyan-btn {
     color: #00FFFF;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-/* LÍNEA AGREGADA: Efecto Neón Dorado Difuso en texto de botón */
+/*  Efecto Neón Dorado Difuso en texto de botón */
 .text-gold-btn {
     color: var(--color-acento-dorado);
     text-shadow: 0 0 10px rgba(204, 184, 0, 0.5);
@@ -166,7 +173,7 @@ h1 {
 .btn-submit { width: 100%; }
 
 /* ==========================================
-   🧠 MAIN Y TARJETAS (4 Botones del Método)
+   🧠 MAIN Y TARJETAS 
    ========================================== */
 .method-container {
     padding: 0 20px 80px 20px; 
@@ -197,7 +204,7 @@ h1 {
     border-color: rgba(0, 240, 255, 0.4);
 }
 
-/* --- LÍNEAS NUEVAS Y ACTUALIZADAS PARA CONTROLAR LAS IMÁGENES 3D --- */
+/* --- LÍNEAS PARA CONTROLAR LAS IMÁGENES 3D --- */
 .icon-glow { 
     flex-shrink: 0; 
     display: flex;
