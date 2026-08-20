@@ -2,15 +2,25 @@
 
 /**
  * 🚀 INTI AI | MOTOR DE CIBERSEGURIDAD Y CONECTIVIDAD API
- * Arquitectura: Fetch API con JSON Payload hacia Webhook de Make.com.
- * Protección: Fallback automático a WhatsApp y Enrutamiento Bidireccional.
+ * Arquitectura: Fetch API, Divulgación Progresiva, Lógica Dinámica de Leads y Data Hygiene.
  */
 
+const CONFIG = {
+    webhookMake: "https://hook.eu1.make.com/mpg6y8j9jr5b21a0h7ygntao6cjwl3k9",
+    numeroWhatsApp: "549111526311635"
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    console.info("🛡️ [INTI AI] Motor de Seguridad Iniciado.");
+    console.info("🛡️ [INTI AI] Motor de Seguridad y Morphing UI Iniciado.");
 
     const form = document.getElementById('form-auditoria');
     const errorContainer = document.getElementById('error-message');
+
+    const paso1 = document.getElementById('paso-1');
+    const paso2 = document.getElementById('paso-2');
+    const btnSiguiente = document.getElementById('btn-siguiente');
+    const btnAuditoria = document.getElementById('btn-auditoria');
+    const mensajeExito = document.getElementById('mensaje-exito');
 
     if (!form) return;
 
@@ -18,106 +28,113 @@ document.addEventListener('DOMContentLoaded', () => {
         nombre: document.getElementById('nombre'),
         email: document.getElementById('email'),
         negocio: document.getElementById('negocio'),
-        telefono: document.getElementById('telefono')
+        telefono: document.getElementById('telefono'),
+        etapa: document.getElementById('etapa_negocio')
     };
 
-    // ==========================================
-    // 🛡️ CAPA 1: SANITIZACIÓN EN TIEMPO REAL
-    // ==========================================
     inputs.nombre.addEventListener('input', function() {
-        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s\-\']/g, '');
     });
     inputs.negocio.addEventListener('input', function() {
-        this.value = this.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,&-]/g, '');
+        this.value = this.value.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,&\-]/g, '');
     });
     inputs.telefono.addEventListener('input', function() {
-        this.value = this.value.replace(/[^\+0-9\s-]/g, '');
+        this.value = this.value.replace(/[^\+0-9\s\-]/g, '');
     });
 
-    // ==========================================
-    // ⚙️ CAPA 2: ENVÍO SEGURO Y ENRUTAMIENTO
-    // ==========================================
+    btnSiguiente.addEventListener('click', () => {
+        errorContainer.style.display = 'none';
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailValido = emailRegex.test(inputs.email.value.trim());
+        
+        if (inputs.nombre.value.trim().length < 3 || !emailValido) {
+            return mostrarError("Por favor, ingresa un nombre y un correo electrónico válido (ej: nombre@correo.com).");
+        }
+
+        paso1.classList.replace('step-visible', 'step-hidden');
+        
+        setTimeout(() => {
+            paso2.classList.replace('step-hidden', 'step-visible');
+        }, 300);
+    });
+
+    const manejarClickWhatsApp = (e) => {
+        e.preventDefault();
+        
+        let msj = `¡Hola! Vi su web y me interesó mucho. Mi negocio está creciendo, pero sigo haciendo muchas cosas a mano y pierdo tiempo. ¿Tienen un minuto para hacerles un par de preguntas rápidas por acá?`;
+
+        if (inputs.nombre.value.trim() !== '') {
+            msj = `¡Hola! Soy *${inputs.nombre.value.trim()}*. Vi su web y me interesó mucho. Mi negocio está creciendo, pero sigo haciendo muchas cosas a mano y pierdo tiempo. ¿Tienen un minuto para hacerles un par de preguntas rápidas por acá?`;
+        }
+
+        window.open(`https://wa.me/${CONFIG.numeroWhatsApp}?text=${encodeURIComponent(msj)}`, '_blank');
+    };
+
+    const floatWa = document.getElementById('btn-whatsapp-float');
+    if(floatWa) floatWa.addEventListener('click', manejarClickWhatsApp);
+
     form.addEventListener('submit', async function(e) {
         e.preventDefault(); 
         errorContainer.style.display = 'none';
 
-        // Detectar qué botón se presionó
-        const submitter = e.submitter;
-        const tipoContacto = submitter ? submitter.dataset.tipo : 'auditoria';
+        const digitosTelefono = inputs.telefono.value.replace(/\D/g, '');
 
-        // 1. Empaquetado Seguro
+        if (!inputs.etapa.value || inputs.negocio.value.trim().length < 2 || digitosTelefono.length < 8 || digitosTelefono.length > 15) {
+            return mostrarError("Por favor, ingresa tu rubro y un número de teléfono válido (ej: +54 9 11...).");
+        }
+
         const payload = {
             nombre: inputs.nombre.value.trim(),
             email: inputs.email.value.trim(),
             negocio: inputs.negocio.value.trim(),
             telefono: inputs.telefono.value.trim(),
-            tipo_contacto: tipoContacto, 
+            etapa_negocio: inputs.etapa.value,
+            tipo_contacto: 'auditoria',
             fecha: new Date().toISOString()
         };
 
-        // 2. Validación
-        if (payload.nombre.length < 3 || !payload.email.includes('@') || payload.telefono.length < 8) {
-            return mostrarError("Por favor, completa todos los campos correctamente.");
-        }
-
-        // 3. Feedback Visual UI
-        const textoOriginal = submitter.innerHTML;
-        const btnAuditoria = document.getElementById('btn-auditoria');
-        const btnWhatsapp = document.getElementById('btn-whatsapp');
-        
+        const textoOriginal = btnAuditoria.innerHTML;
         btnAuditoria.disabled = true;
-        btnWhatsapp.disabled = true;
-        submitter.innerHTML = `<span class="text-cyan-btn">ENVIANDO</span> <span class="text-gold-btn">SOLICITUD...</span>`;
+        btnAuditoria.innerHTML = `PROCESANDO...`;
 
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
         try {
-            const MAKE_WEBHOOK_URL = "https://hook.eu1.make.com/mpg6y8j9jr5b21a0h7ygntao6cjwl3k9"; 
-
-            const response = await fetch(MAKE_WEBHOOK_URL, {
+            const response = await fetch(CONFIG.webhookMake, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
                 signal: controller.signal
             });
 
             clearTimeout(timeoutId);
 
-            if (!response.ok) throw new Error("Respuesta no satisfactoria del servidor");
+            if (!response.ok) throw new Error("Respuesta no satisfactoria");
 
-            console.info(`✅ Lead procesado vía [${tipoContacto.toUpperCase()}]`);
+            console.info(`✅ Lead procesado vía [AUDITORIA] - Data Limpia`);
 
-            // 4. Salto Dinámico
-            ejecutarSaltoFinal(payload, tipoContacto);
-            form.reset();
+            paso2.classList.replace('step-visible', 'step-hidden');
+            setTimeout(() => {
+                mensajeExito.classList.replace('step-hidden', 'step-visible');
+            }, 400);
 
         } catch (error) {
             clearTimeout(timeoutId);
-            console.warn("⚠️ Error en Webhook. Aplicando Fallback directo.");
-            ejecutarSaltoFinal(payload, tipoContacto);
+            console.warn("⚠️ Error en Webhook. Aplicando Fallback.");
+            
+            let mensajeTexto = `¡Hola INTI AI! 🚀 Intenté agendar mi auditoría pero hubo un error de conexión. Soy *${payload.nombre}*.`;
+            window.open(`https://wa.me/${CONFIG.numeroWhatsApp}?text=${encodeURIComponent(mensajeTexto)}`, '_blank');
             form.reset();
         } finally {
             btnAuditoria.disabled = false;
-            btnWhatsapp.disabled = false;
-            submitter.innerHTML = textoOriginal;
+            btnAuditoria.innerHTML = textoOriginal;
         }
     });
 
     function mostrarError(mensaje) {
         errorContainer.innerHTML = `<strong>⚠️ Error:</strong> ${mensaje}`;
         errorContainer.style.display = 'block';
-    }
-
-    function ejecutarSaltoFinal(datos, tipo) {
-        if (tipo === 'auditoria') {
-            window.location.href = "https://calendar.app.google/zq22ThDPgpo4tq5r7";
-        } else {
-            const numeroWhatsApp = "549111526311635";
-            const mensajeTexto = `¡Hola INTI AI! 🚀 Mi nombre es *${datos.nombre}* de *${datos.negocio}*. Quiero contactarme de forma directa para evaluar una solución.`;
-            window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensajeTexto)}`;
-        }
     }
 });

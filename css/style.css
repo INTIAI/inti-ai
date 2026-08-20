@@ -1,257 +1,302 @@
-/* ==========================================================================
-   🎨 INTI AI | 
-   ========================================================================== */
 :root {
     --color-fondo-oscuro: #0B0F19;
-    --color-acento-dorado: #ccb800; 
-    --color-acento-inti: #15a7ebfa;   
-    --color-texto-principal: #f8fafcce;
-    --color-texto-secundario: #94A3B8;
+    --color-fondo-secundario: #0A1220;
+    --color-acento-inti: #38D9B9;   
+    --color-acento-dorado: #a4b602; 
+    --color-texto-principal: #97e4c0d2;
+    --color-texto-secundario: #94A3B8; 
+    
     --transicion-organica: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    --borde-sutil: rgba(255, 255, 255, 0.05);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
+html { scroll-behavior: smooth; }
+
 body { 
-    font-family: 'Helvetica Neue', sans-serif; 
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
     color: var(--color-texto-principal); 
-    line-height:1.6; 
-    overflow-x:hidden; 
+    line-height: 1.6; 
+    overflow-x: hidden; 
     background: url('../assets/hero-bg-inti.png') no-repeat center center;
     background-size: cover;
-    background-attachment: scroll;
-    background-color: var(--color-fondo-oscuro); 
-}
-
-@media (min-width: 769px) {
-    body {
-        background-attachment: fixed;
-    }
+    background-attachment: fixed;
+    background-color: var(--color-fondo-oscuro);
 }
 
 /* ==========================================
    ✨ EFECTOS GLOBALES Y TIPOGRAFÍA
    ========================================== */
 .gradient-text, h1, .footer-section h2 {
-    background: linear-gradient(90deg, var(--color-acento-dorado), var(--color-acento-inti));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: #FFFFFF; 
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0px 5px 15px rgba(0, 240, 255, 0.2);
+    background: linear-gradient(90deg, var(--color-acento-inti), #292727);
+    -webkit-background-clip: text; background-clip: text; color: transparent; 
 }
+.text-white { color: #a3a3a0c7; text-shadow: 0 0 15px rgb(0, 240, 155, 0.6);}
+.text-cyan { color: var(--color-acento-inti); text-shadow: 0 0 15px rgba(0, 240, 255, 0.6); }
 
-/* Identidad Visual (Posicionamiento y Flexbox) */
 .main-brand-tagline-container {
-    position: absolute;
-    top: 40px;
-    left: 5vw;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    z-index: 20;
+    position: absolute; top: 40px; left: 5vw; display: flex; align-items: center; gap: 12px; z-index: 20;
+    background: rgba(11, 15, 25, 0.6); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 50px; border: 1px solid var(--borde-sutil);
 }
-
-.brand-logo {
-    width: 32px;
-    height: 32px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px rgba(229, 169, 60, 0.4));
-}
-
-.hero-tagline { 
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.05rem; 
-    font-weight: 500; 
-    letter-spacing: 0.5px; 
-    color: var(--color-texto-principal);
-    margin: 0;
-    text-shadow: 0 2px 10px rgba(43, 8, 8, 0.164);
-}
-
-/* Clase aislada para INTI AI */
-.marca-inti-ai {
-    color: #00FFFF; 
-    font-weight: 800; 
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 255, 255, 0.8);
-}
-
-.brand-tagline-gold {
-    color: var(--color-texto-principal); 
-    font-weight: 500; 
-    text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
-}
+.brand-logo { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.3)); }
+.hero-tagline { font-size: 0.95rem; font-weight: 500; color: var(--color-texto-principal); margin: 0; }
+.marca-inti-ai { color: var(--color-acento-inti); font-weight: 700; text-shadow: 0 0 15px rgba(0, 240, 255, 0.6); }
+.brand-tagline-white { color: var(--color-texto-secundario); font-weight: 400; }
 
 /* ==========================================
-   💻 HERO SECTION (Limpio y Transparente)
+   💻 HERO SECTION
    ========================================== */
 .hero-section {
-    position: relative;
-    background: transparent; 
-    min-height: 80vh; 
-    display: flex; align-items: center; justify-content: center; text-align: center;
-    padding: 100px 20px 60px 20px; 
+    position: relative; min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 120px 20px 60px 20px; z-index: 2;
 }
-
-.hero-content { 
-    max-width: 800px; 
-    margin-top: 30px; 
-    position: relative;
-    z-index: 2;
+.hero-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, rgba(11, 15, 25, 0.3) 0%, rgba(11, 15, 25, 0.8) 100%); z-index: 1;
 }
-
-.welcome-text {
-    font-size: 0.85rem;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #ffffff;
-    margin-bottom: 5px; 
-    font-weight: 700;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-}
-
-h1 { 
-    font-size: clamp(2.5rem, 6vw, 4.5rem); 
-    line-height: 1.1; 
-    margin-bottom: 25px; 
-    font-weight: 200;
-}
-
-.hero-subtitle { 
-    font-size: 1.35rem; 
-    line-height: 1.6; 
-    color: var(--color-texto-principal); 
-    max-width: 800px; 
-    margin: 0 auto 40px auto; 
-    text-wrap: pretty; 
-    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.95); 
-}
+.hero-content { max-width: 800px; position: relative; z-index: 2; margin-top: -20px; }
+.welcome-text { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--color-texto-secundario); margin-bottom: 15px; font-weight: 600; }
+h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px; font-weight: 600; }
+.hero-subtitle { font-size: 1.15rem; line-height: 1.6; color: var(--color-texto-secundario); max-width: 650px; margin: 0 auto 35px auto; text-shadow: none; font-weight: 400;}
 
 /* ==========================================
-   🎯 BOTONES PRINCIPALES (BÍCOLOR GRADIENT NEÓN Y GLASS)
+   🎯 BOTONES GENERALES
    ========================================== */
 .btn-primary, .btn-submit {
-    display: inline-block;
-    
-    /* Dual-Tone Border Effect a través de capas de recortes de fondo. Transiciona suave de cian a dorado. */
-    background: linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.85)) padding-box,
-                linear-gradient(90deg, #00FFFF, var(--color-acento-dorado)) border-box;
-    border: 2px solid transparent;
-    
-    padding: 16px 45px;
-    font-size: 1.1rem; 
-    font-weight: 800; 
-    letter-spacing: 1px;
-    border-radius: 50px; 
-    text-decoration: none;
-    cursor: pointer;
-    transition: var(--transicion-organica);
-    
-    /* Sombra Neón Doble, Difusa y Expansiva (Cian izquierda, Dorado derecha). */
-    box-shadow: -10px 0 20px rgba(0, 255, 255, 0.25), 10px 0 20px rgba(204, 184, 0, 0.25);
-    will-change: transform, box-shadow;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px; 
+    background-color: #38D9B9; border: 2px solid #38D9B9; color: #030712 !important; 
+    padding: 14px 35px; font-size: 1rem; font-weight: 700; border-radius: 8px; 
+    text-decoration: none; cursor: pointer; transition: var(--transicion-organica); text-align: center; 
+    box-shadow: 0 4px 15px rgba(56, 217, 185, 0.1); width: 100%;
 }
-
+@media (min-width: 768px) { .btn-primary { width: auto; } }
 .btn-primary:hover, .btn-submit:hover {
-    transform: translateY(-5px) scale(1.03);
-    /*  Incremento del resplandor en hover para efecto WhatsApp, expansivo y difuso. */
-    box-shadow: -15px 0 35px rgba(0, 255, 255, 0.6), 15px 0 35px rgba(204, 184, 0, 0.6);
+    background-color: #4df0ce; border-color: #4df0ce; transform: translateY(-2px); box-shadow: 0 0 15px rgba(56, 217, 185, 0.3); 
 }
-
-/*  Efecto Neón Cian Difuso en texto de botón */
-.text-cyan-btn {
-    color: #00FFFF;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+.btn-secondary {
+    display: inline-block; background: rgba(15, 23, 42, 0.4); border: 1px solid var(--borde-sutil); color: var(--color-texto-secundario); padding: 14px 35px; font-size: 1rem; font-weight: 600; border-radius: 8px; text-decoration: none; cursor: pointer; transition: var(--transicion-organica); text-align: center;
 }
-
-/*  Efecto Neón Dorado Difuso en texto de botón */
-.text-gold-btn {
-    color: var(--color-acento-dorado);
-    text-shadow: 0 0 10px rgba(204, 184, 0, 0.5);
-}
-
-.btn-submit { width: 100%; }
+.btn-secondary:hover { background: rgba(15, 23, 42, 0.8); color: #FFF; border-color: rgba(56, 217, 185, 0.3); }
 
 /* ==========================================
    🧠 MAIN Y TARJETAS 
    ========================================== */
-.method-container {
-    padding: 0 20px 80px 20px; 
-    max-width: 1000px; 
-    margin: 40px auto 0 auto; 
-    position: relative; z-index: 10;
-}
-
-.method-title { font-size: 2.2rem; margin-bottom: 40px; text-align: center; }
-
-.grid-spaces { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.method-container { padding: 0 20px 40px 20px; max-width: 1000px; margin: 0 auto; position: relative; z-index: 10; }
+.grid-spaces { display: grid; grid-template-columns: 1fr; gap: 24px; }
 @media (min-width: 768px) { .grid-spaces { grid-template-columns: 1fr 1fr; } }
 
 .space-card {
-    background: rgba(11, 15, 25, 0.45); 
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    padding: 16px 28px; 
-    border-radius: 20px; 
-    display: flex; gap: 18px; align-items: center; 
-    cursor: pointer;
-    transition: var(--transicion-organica);
+    background: rgba(11, 15, 25, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--borde-sutil); padding: 24px 30px; border-radius: 16px; display: flex; gap: 18px; align-items: center; transition: var(--transicion-organica);
 }
+.space-card:hover { transform: translateY(-5px); background: rgba(20, 30, 50, 0.6); border-color: rgba(56, 217, 185, 0.2); }
 
-.space-card:hover {
-    transform: translateY(-6px) scale(1.02);
-    background: rgba(15, 25, 45, 0.65);
-    border-color: rgba(0, 240, 255, 0.4);
+.icon-glow { flex-shrink: 0; }
+.custom-card-icon { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0px 0px 10px rgba(0, 240, 255, 0.2)); }
+.card-text h3 { color: #FFFFFF; font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; }
+.card-text p { color: var(--color-texto-secundario); font-size: 0.9rem; line-height: 1.5; }
+
+/* ==========================================
+   🚀 MÓDULO 2 - CARRUSEL DE INTEGRACIONES
+   ========================================== */
+.tech-stack-container {
+    padding: 30px 0; overflow: hidden; background: rgba(11, 15, 25, 0.3); border-top: 1px solid var(--borde-sutil); border-bottom: 1px solid var(--borde-sutil); margin-bottom: 60px;
 }
+.marquee { width: 100%; overflow: hidden; white-space: nowrap; }
+.marquee-content { display: inline-block; animation: scroll-marquee 25s linear infinite; }
+.tech-logo {
+    display: inline-block; font-size: 1.4rem; font-weight: 700; color: var(--color-texto-secundario); margin: 0 40px; opacity: 0.4; transition: var(--transicion-organica); cursor: default; letter-spacing: 1px;
+}
+.tech-logo:hover { opacity: 1; color: var(--color-texto-principal); text-shadow: 0 0 15px rgba(56, 217, 185, 0.5); }
+@keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* --- LÍNEAS NUEVAS Y ACTUALIZADAS PARA CONTROLAR LAS IMÁGENES 3D --- */
-.icon-glow { 
-    flex-shrink: 0; 
+/* ==========================================
+   🚀 MÓDULO 1 - SHOWCASE (Casos de Éxito)
+   ========================================== */
+.showcase-container { padding: 20px 20px 60px; max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
+.showcase-card { flex-direction: column; align-items: flex-start; padding: 30px 40px; text-align: left; }
+.badge { background: rgba(56, 217, 185, 0.1); color: var(--color-acento-inti); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; border: 1px solid rgba(56, 217, 185, 0.3); margin-bottom: 15px; display: inline-block; letter-spacing: 0.5px; }
+.showcase-content h3 { font-size: 1.4rem; color: #FFF; margin-bottom: 8px; font-weight: 500; }
+.showcase-content p { color: var(--color-texto-secundario); font-size: 0.9rem; max-width: 650px; line-height: 1.4; margin-bottom: 10px; }
+
+.metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; margin: 20px 0; border-top: 1px solid var(--borde-sutil); border-bottom: 1px solid var(--borde-sutil); padding: 20px 0; }
+.metric-item { text-align: center; }
+.metric-number { display: block; font-size: 2.2rem; font-weight: 700; line-height: 1; margin-bottom: 5px; letter-spacing: -1px; }
+.metric-label { font-size: 0.85rem; color: var(--color-texto-secundario); font-weight: 400; }
+
+.btn-download { display: inline-block; background-color: #38D9B9; border: 1px solid #38D9B9; color: #030712; padding: 10px 24px; font-size: 0.9rem; font-weight: 700; border-radius: 6px; text-decoration: none; cursor: pointer; transition: var(--transicion-organica); box-shadow: 0 4px 10px rgba(56, 217, 185, 0.1); }
+.btn-download:hover { background-color: #4df0ce; border-color: #4df0ce; transform: translateY(-2px); box-shadow: 0 0 15px rgba(56, 217, 185, 0.3); }
+
+/* ==========================================
+   🚀 MÓDULO 3 - PREGUNTAS FRECUENTES
+   ========================================== */
+.faq-container { padding: 20px 20px 80px; max-width: 800px; margin: 0 auto; position: relative; z-index: 10; }
+.faq-list { display: flex; flex-direction: column; gap: 16px; }
+.faq-item { background: rgba(11, 15, 25, 0.5); border: 1px solid var(--borde-sutil); border-radius: 12px; padding: 20px; backdrop-filter: blur(12px); transition: var(--transicion-organica); }
+.faq-item:hover { border-color: rgba(56, 217, 185, 0.3); }
+.faq-item summary { font-size: 1.1rem; font-weight: 600; color: #FFF; cursor: pointer; list-style: none; position: relative; padding-right: 30px; outline: none; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%); color: var(--color-acento-inti); font-size: 1.5rem; font-weight: 400; transition: transform 0.3s ease; }
+.faq-item[open] summary::after { content: '−'; transform: translateY(-50%) rotate(180deg); }
+.faq-item p { margin-top: 15px; color: var(--color-texto-secundario); font-size: 0.95rem; line-height: 1.6; }
+
+/* ==========================================
+   📋 SECCIÓN FORMULARIO (Auditoría)
+   ========================================== */
+.footer-section { padding: 80px 20px; text-align: center; background-color: var(--color-fondo-oscuro); position: relative; z-index: 2; }
+.section-title { font-size: 2.2rem; margin-bottom: 20px; font-weight: 600; color: #FFF;}
+
+.booking-form { max-width: 450px; margin: 0 auto; text-align: left; }
+.booking-form input, .custom-select { width: 100%; padding: 18px 20px; margin-bottom: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: #FFF; border-radius: 8px; font-family: inherit; font-size: 1rem; transition: all 0.3s ease; }
+.booking-form input:focus, .custom-select:focus { border-color: var(--color-acento-inti); outline: none; background: rgba(255, 255, 255, 0.05); }
+.custom-select option { background: var(--color-fondo-oscuro); color: white; }
+
+/* ==========================================
+   🌟 MEGA FOOTER INSTITUCIONAL CENTRADO
+   ========================================== */
+.site-footer {
+    background-color: #070B14;
+    border-top: 1px solid var(--borde-sutil);
+    padding: 60px 20px 20px 20px;
+    position: relative;
+    z-index: 10;
+    text-align: center; /* Alineación del bloque global */
+}
+.footer-content-centered {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.footer-logo {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px; 
+    gap: 10px;
+}
+.footer-description {
+    font-size: 0.95rem;
+    color: var(--color-texto-secundario);
+    line-height: 1.6;
 }
 
-.custom-card-icon {
-    width: 72px;  
-    height: 72px; 
-    object-fit: contain; 
-    filter: drop-shadow(0px 0px 10px rgba(0, 240, 255, 0.35)); 
+/* 📞 ESTRUCTURA DE CONTACTO: Centrado global pero alineado a la izquierda interno */
+.footer-contact-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el bloque entero en el footer */
+    gap: 15px;
+    margin-top: 10px;
 }
-/* ------------------------------------------------------------------ */
+.footer-contact-title {
+    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.contact-items-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* 🌟 EL TRUCO ÓPTICO: Alinea los iconos entre sí */
+    gap: 12px;
+}
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-acento-inti);
+}
+.contact-link {
+    font-size: 0.95rem;
+    color: var(--color-texto-secundario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transicion-organica);
+}
+.contact-item:hover svg {
+    color: #FFF;
+    filter: drop-shadow(0 0 5px rgba(56, 217, 185, 0.6));
+}
+.contact-link:hover {
+    color: #FFF;
+    text-shadow: 0 0 10px rgba(56, 217, 185, 0.5);
+}
 
-.card-text h3 { color: #FFFFFF; font-size: 1.25rem; margin-bottom: 4px; }
-.card-text p { color: var(--color-texto-secundario); font-size: 0.9rem; line-height: 1.4; }
+/* Barra inferior del Footer */
+.footer-bottom {
+    max-width: 800px;
+    margin: 0 auto;
+    border-top: 1px solid var(--borde-sutil);
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 15px;
+}
+.copy-legal {
+    font-size: 0.85rem;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.copy-legal a {
+    color: #64748B;
+    text-decoration: none;
+    transition: var(--transicion-organica);
+}
+.copy-legal a:hover { color: #FFF; }
+.legal-separator { color: #334155; }
+
+.made-in {
+    font-size: 0.85rem;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-acento-inti);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-acento-inti);
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 217, 185, 0.4); }
+    70% { box-shadow: 0 0 0 6px rgba(56, 217, 185, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 217, 185, 0); }
+}
+
+@media (max-width: 768px) {
+    .footer-section { padding-bottom: 60px; }
+    .footer-bottom { padding-bottom: 100px; /* Espacio para flotante WA */ }
+}
 
 /* ==========================================
-   📋 FOOTER Y FORMULARIO
+   🪄 MICRO-INTERACCIONES Y MORPHING
    ========================================== */
-.footer-section { padding: 80px 20px; text-align: center; background-color: rgba(13, 20, 35, 0.2); border-top: 1px solid rgba(0, 240, 255, 0.1); }
-.footer-section h2 { font-size: 2.2rem; margin-bottom: 30px; }
-.booking-form { max-width: 500px; margin: 0 auto; text-align: left; }
-.booking-form input { width: 100%; padding: 16px; margin-bottom: 15px; background: var(--color-fondo-oscuro); border: 1px solid #333; color: white; border-radius: 8px; }
-.booking-form input:focus { border-color: var(--color-acento-inti); outline: none; }
+.step-container { transition: max-height 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s ease-in-out, transform 0.5s ease; overflow: hidden; }
+.step-hidden { max-height: 0; opacity: 0; transform: translateY(-10px); pointer-events: none; margin: 0; padding: 0; border: none; }
+.step-visible { max-height: 600px; opacity: 1; transform: translateY(0); }
+.success-box { background: rgba(56, 217, 185, 0.1); color: var(--color-acento-inti); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(56, 217, 185, 0.3); font-size: 1rem; font-weight: 500; }
 
 /* ==========================================
-   🔧 ACCESIBILIDAD Y RESPONSIVIDAD 
+   🔧 FIX WHATSAPP Y UTILIDADES
    ========================================== */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
 .whatsapp-float {
-    position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white;
-    width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; transition: var(--transicion-organica);
+    position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); z-index: 1000; transition: var(--transicion-organica);
 }
-
-.whatsapp-float:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.7); color: white; }
+.whatsapp-float:hover { transform: translateY(-3px) scale(1.05); background-color: #2bc4a6; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
 
 @media (max-width: 768px) {
-    .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-    .whatsapp-float svg { width: 26px; height: 26px; }
-    .main-brand-tagline-container { top: 20px; left: 20px; }
-    .brand-logo { width: 26px; height: 26px; }
-    .hero-tagline { font-size: 0.9rem; }
-    .space-card { padding: 18px; }
-    .method-container { margin-top: -60px; }
+    .whatsapp-float { bottom: 25px; right: 20px; width: 55px; height: 55px; }
+    .whatsapp-float svg { width: 28px; height: 28px; }
 }
