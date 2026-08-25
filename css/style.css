@@ -109,7 +109,7 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
 @keyframes scroll-marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==========================================
-   🚀 MÓDULO 1 - SHOWCASE (Casos de Éxito)
+   🚀 MÓDULO 1 - SHOWCASE (Casos de Éxito Ajustado)
    ========================================== */
 .showcase-container { padding: 20px 20px 60px; max-width: 900px; margin: 0 auto; position: relative; z-index: 10; }
 .showcase-card { flex-direction: column; align-items: flex-start; padding: 30px 40px; text-align: left; }
@@ -158,7 +158,7 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
     padding: 60px 20px 20px 20px;
     position: relative;
     z-index: 10;
-    text-align: center; /* Alineación del bloque global */
+    text-align: center;
 }
 .footer-content-centered {
     max-width: 600px;
@@ -180,11 +180,11 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
     line-height: 1.6;
 }
 
-/* 📞 ESTRUCTURA DE CONTACTO: Centrado global pero alineado a la izquierda interno */
+/* 📞 ESTRUCTURA DE CONTACTO */
 .footer-contact-block {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el bloque entero en el footer */
+    align-items: center;
     gap: 15px;
     margin-top: 10px;
 }
@@ -198,7 +198,7 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
 .contact-items-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* 🌟 EL TRUCO ÓPTICO: Alinea los iconos entre sí */
+    align-items: flex-start; 
     gap: 12px;
 }
 .contact-item {
@@ -250,7 +250,6 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
 }
 .copy-legal a:hover { color: #FFF; }
 .legal-separator { color: #334155; }
-
 .made-in {
     font-size: 0.85rem;
     color: #64748B;
@@ -273,11 +272,6 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
     100% { box-shadow: 0 0 0 0 rgba(56, 217, 185, 0); }
 }
 
-@media (max-width: 768px) {
-    .footer-section { padding-bottom: 60px; }
-    .footer-bottom { padding-bottom: 100px; /* Espacio para flotante WA */ }
-}
-
 /* ==========================================
    🪄 MICRO-INTERACCIONES Y MORPHING
    ========================================== */
@@ -286,9 +280,6 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
 .step-visible { max-height: 600px; opacity: 1; transform: translateY(0); }
 .success-box { background: rgba(56, 217, 185, 0.1); color: var(--color-acento-inti); padding: 20px; border-radius: 12px; text-align: center; border: 1px solid rgba(56, 217, 185, 0.3); font-size: 1rem; font-weight: 500; }
 
-/* ==========================================
-   🔧 FIX WHATSAPP Y UTILIDADES
-   ========================================== */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
 
 .whatsapp-float {
@@ -296,7 +287,83 @@ h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.15; margin-bottom: 20px
 }
 .whatsapp-float:hover { transform: translateY(-3px) scale(1.05); background-color: #2bc4a6; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
 
+/* ==========================================
+   📱 RESPONSIVIDAD: TABLET Y MÓVIL (FIX SUPERPOSICIÓN)
+   ========================================== */
+@media (max-width: 1024px) {
+    .hero-section {
+        padding-top: 140px; /* Más aire en tablet */
+    }
+    .main-brand-tagline-container {
+        left: 20px;
+        top: 25px;
+    }
+}
+
 @media (max-width: 768px) {
-    .whatsapp-float { bottom: 25px; right: 20px; width: 55px; height: 55px; }
+    /* 🚀 FIX SUPERPOSICIÓN: Empujamos el Hero hacia abajo */
+    .hero-section {
+        padding-top: 180px; 
+        padding-bottom: 40px;
+    }
+    
+    /* 🚀 FIX CONTENEDOR: Lo centramos y estructuramos para celular */
+    .main-brand-tagline-container {
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        padding: 10px 15px;
+        border-radius: 16px;
+        justify-content: center;
+    }
+    
+    .brand-logo {
+        width: 24px;
+        height: 24px;
+    }
+
+    .hero-tagline {
+        font-size: 0.75rem;
+        line-height: 1.4;
+        text-align: left;
+    }
+    
+    .welcome-text {
+        font-size: 0.75rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    
+    h1 {
+        font-size: 2.3rem;
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    .showcase-card {
+        padding: 25px 20px;
+    }
+    
+    .metrics-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
+
+    .btn-download { width: 100%; text-align: center; }
+
+    .footer-section { padding-bottom: 60px; }
+    .footer-bottom { padding-bottom: 100px; /* Espacio para flotante WA */ }
+
+    .whatsapp-float {
+        bottom: 25px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
     .whatsapp-float svg { width: 28px; height: 28px; }
 }
