@@ -6,7 +6,7 @@
  */
 
 const CONFIG = {
-    webhookMake: "https://hook.eu1.make.com/mpg6y8j9jr5b21a0h7ygntao6cjwl3k9",
+    webhookMake: "https://hook.eu1.make.com/82m4nzufy8asqm0onzpi7pqay5ifs5aj",
     numeroWhatsApp: "549111526311635"
 };
 
